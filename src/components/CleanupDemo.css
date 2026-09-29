@@ -1,0 +1,161 @@
+/* ---- Cleaning-up demo container ---- */
+.cleanup-demo {
+  max-width: var(--content-narrow-width);
+  margin-inline: auto;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-md);
+}
+
+.cleanup-demo__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.cleanup-demo__status {
+  font-weight: var(--fw-semibold);
+  color: var(--color-accent);
+  font-size: var(--fs-sm);
+}
+
+.cleanup-demo__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.cleanup-tag {
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-pill);
+  /* Dimmed until surfaced during the animation; static view shows full. */
+  opacity: 1;
+  transition:
+    opacity var(--transition-base),
+    transform var(--transition-base);
+}
+
+.cleanup-tag--filler {
+  background-color: #fdeede;
+  color: #a65b00;
+}
+
+.cleanup-tag--correction {
+  background-color: var(--color-accent-soft);
+  color: var(--color-accent-hover);
+}
+
+.cleanup-tag--repetition {
+  background-color: #e7e2fb;
+  color: #4a34a8;
+}
+
+/* During the animation the tags start dim and glow on when surfaced. */
+.cleanup-demo:not(.cleanup-demo--static) .cleanup-tag {
+  opacity: 0.35;
+}
+
+.cleanup-demo:not(.cleanup-demo--static) .cleanup-tag--on {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.cleanup-demo__transcript {
+  font-size: var(--fs-lg);
+  line-height: var(--lh-normal);
+}
+
+/* Base token colouring (used by the static before/after view). */
+.cleanup-token--keep {
+  color: var(--color-text);
+}
+
+.cleanup-token--filler,
+.cleanup-token--repetition {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  text-decoration-color: currentColor;
+}
+
+.cleanup-token--correction {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+}
+
+/* ---- Animated token states (override base while animating) ---- */
+.cleanup-token {
+  transition:
+    color var(--transition-base),
+    opacity var(--transition-base),
+    max-width var(--transition-base);
+}
+
+/* Not yet processed: shown plainly, no strike-through. */
+.cleanup-token--pending {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+/* Processed + kept (plain keep or the corrected replacement). */
+.cleanup-token--kept {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.cleanup-token--kept[data-kind='correction'] {
+  color: var(--color-accent);
+  font-weight: var(--fw-semibold);
+}
+
+/* Processed + removed (filler / repetition / superseded correction). */
+.cleanup-token--dropped {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  opacity: 0.45;
+}
+
+/* ---- Static before/after fallback (reduced motion) ---- */
+.cleanup-demo__panes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.cleanup-demo__pane-label {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.cleanup-demo__pane-label--clean {
+  color: var(--color-accent);
+}
+
+@media (max-width: 640px) {
+  .cleanup-demo__panes {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reduced motion: token transitions off, tags always fully shown. */
+@media (prefers-reduced-motion: reduce) {
+  .cleanup-token,
+  .cleanup-tag {
+    transition: none !important;
+  }
+
+  .cleanup-demo .cleanup-tag {
+    opacity: 1 !important;
+  }
+}

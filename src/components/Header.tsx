@@ -4,6 +4,7 @@ import './Header.css'
 const NAV_LINKS = [
   { label: 'How it works', href: '#how-it-works' },
   { label: 'Features', href: '#features' },
+  { label: "What's new", href: '#whats-new' },
   { label: 'Privacy', href: '#privacy' },
   { label: 'FAQ', href: '#faq' },
 ]
@@ -29,6 +30,7 @@ function Header() {
         </a>
 
         <nav
+          id="primary-navigation"
           className={`site-nav ${menuOpen ? 'site-nav--open' : ''}`}
           aria-label="Primary"
         >

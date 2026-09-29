@@ -1,5 +1,6 @@
 import './HowItWorks.css'
 import { cleanupTranscript, cleanupLabels } from '../data/content'
+import CleanupDemo from '../components/CleanupDemo'
 
 const CARDS = [
   {
@@ -19,10 +20,10 @@ const CARDS = [
 /**
  * "How it works" section.
  *
- * Three feature cards plus a structural container for the live
- * "Cleaning up…" demo. FEAT-003 animates the demo (token removal +
- * labelled tags); here it renders the default/static state from the
- * shared transcript in content.ts.
+ * Three feature cards plus the live "Cleaning up…" demo (CleanupDemo),
+ * which progressively transforms the raw transcript into the polished
+ * version and surfaces Filler / Correction / Repetition tags. Both the
+ * cards and the demo draw copy from content.ts.
  */
 function HowItWorks() {
   return (
@@ -51,36 +52,7 @@ function HowItWorks() {
           ))}
         </ul>
 
-        <div
-          className="cleanup-demo"
-          data-demo="cleaning-up"
-          aria-label="Merry cleaning up a transcript"
-        >
-          <div className="cleanup-demo__head">
-            <span className="cleanup-demo__status">Cleaning up…</span>
-            <ul className="cleanup-demo__legend">
-              {cleanupLabels.map((item) => (
-                <li
-                  key={item.kind}
-                  className={`cleanup-tag cleanup-tag--${item.kind}`}
-                >
-                  {item.label}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <p className="cleanup-demo__transcript">
-            {cleanupTranscript.map((token, i) => (
-              <span
-                key={i}
-                className={`cleanup-token cleanup-token--${token.kind}`}
-                data-kind={token.kind}
-              >
-                {token.text}{' '}
-              </span>
-            ))}
-          </p>
-        </div>
+        <CleanupDemo tokens={cleanupTranscript} labels={cleanupLabels} />
       </div>
     </section>
   )

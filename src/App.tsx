@@ -5,6 +5,7 @@ import SocialProof from './sections/SocialProof'
 import HowItWorks from './sections/HowItWorks'
 import Tone from './sections/Tone'
 import Capabilities from './sections/Capabilities'
+import WhatsNew from './sections/WhatsNew'
 import Privacy from './sections/Privacy'
 import Testimonials from './sections/Testimonials'
 import Faq from './sections/Faq'
@@ -27,6 +28,7 @@ function App() {
         <HowItWorks />
         <Tone />
         <Capabilities />
+        <WhatsNew />
         <Privacy />
         <Testimonials />
         <Faq />

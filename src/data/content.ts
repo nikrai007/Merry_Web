@@ -172,6 +172,54 @@ export const testimonials: Testimonial[] = [
 ]
 
 /* ------------------------------------------------------------------ *
+ * "New in Merry" — extensible extras section
+ *
+ * The user mentioned they enhanced Merry with "a couple more things" but
+ * did NOT say what those are. Rather than invent specific feature claims,
+ * this array drives a clearly-marked placeholder section (WhatsNew.tsx).
+ *
+ * === HOW TO ADD A REAL FEATURE ==================================== *
+ * Replace a placeholder below (or push a NEW object) with your real
+ * enhancement. Each card is:
+ *
+ *   {
+ *     eyebrow: 'New',            // small label above the title (optional)
+ *     title:   'Feature name',   // the enhancement's name
+ *     body:    'One or two sentences describing what it does.',
+ *     placeholder: false,        // set false once it's a REAL feature
+ *   }
+ *
+ * The section renders every item in order and shows a "Placeholder"
+ * badge for any card left with `placeholder: true`. No code changes to
+ * WhatsNew.tsx are needed — just edit this array.
+ * ================================================================== */
+export interface MerryExtra {
+  /** Small label shown above the title (e.g. "New", "Beta"). */
+  eyebrow: string
+  title: string
+  body: string
+  /** true = clearly-marked placeholder; false = a real shipped feature. */
+  placeholder: boolean
+}
+
+export const MERRY_EXTRAS: MerryExtra[] = [
+  // TODO: Replace this placeholder with one of your real new features.
+  {
+    eyebrow: 'New',
+    title: 'Your new feature — describe it here.',
+    body: 'This is a placeholder card. Swap in the name and a short description of the first enhancement you added to Merry, and set `placeholder: false` in src/data/content.ts.',
+    placeholder: true,
+  },
+  // TODO: Replace this placeholder with another real new feature.
+  {
+    eyebrow: 'New',
+    title: 'Another new feature — describe it here.',
+    body: 'This is a placeholder card. Add your second enhancement here in the same shape, or push additional items onto the MERRY_EXTRAS array to show more cards.',
+    placeholder: true,
+  },
+]
+
+/* ------------------------------------------------------------------ *
  * Social-proof placeholder "logos" (styled text pills, not real logos)
  * ------------------------------------------------------------------ */
 export const placeholderLogos: string[] = [

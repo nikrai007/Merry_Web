@@ -1,15 +1,20 @@
 import './SocialProof.css'
 import { placeholderLogos } from '../data/content'
+import { useInView } from '../hooks/useInView'
 
 /**
  * Social proof section.
  *
- * The comparison tracks (Keyboard 45 wpm vs Merry 220 wpm) are rendered
- * as static, labelled bars here. FEAT-003 animates the typing/scrolling.
- * The company "logos" are styled text pills — deliberately generic, not
- * real third-party trademarks.
+ * The comparison tracks (Keyboard 45 wpm vs Merry 220 wpm) animate two
+ * "typing" bars once the section scrolls into view: the Merry track fills
+ * roughly 4x faster than the keyboard track, mirroring the 45 → 220 wpm
+ * claim. The CSS keyframes are paused under prefers-reduced-motion, where
+ * the bars render at their final width instead. The company "logos" are
+ * styled text pills — deliberately generic, not real third-party marks.
  */
 function SocialProof() {
+  const [ref, inView] = useInView<HTMLDivElement>({ threshold: 0.35 })
+
   return (
     <section
       id="social-proof"
@@ -35,8 +40,9 @@ function SocialProof() {
         </div>
 
         <div
-          className="wpm-compare"
-          aria-label="Words-per-minute comparison"
+          className={`wpm-compare ${inView ? 'wpm-compare--run' : ''}`}
+          ref={ref}
+          aria-label="Words-per-minute comparison: keyboard 45, Merry 220"
         >
           <div className="wpm-track wpm-track--keyboard">
             <div className="wpm-track__head">
@@ -44,10 +50,7 @@ function SocialProof() {
               <span className="wpm-track__value">45 wpm</span>
             </div>
             <div className="wpm-track__bar">
-              <span
-                className="wpm-track__fill wpm-track__fill--keyboard"
-                style={{ width: '20%' }}
-              />
+              <span className="wpm-track__fill wpm-track__fill--keyboard" />
             </div>
           </div>
 
@@ -57,10 +60,7 @@ function SocialProof() {
               <span className="wpm-track__value">220 wpm</span>
             </div>
             <div className="wpm-track__bar">
-              <span
-                className="wpm-track__fill wpm-track__fill--merry"
-                style={{ width: '100%' }}
-              />
+              <span className="wpm-track__fill wpm-track__fill--merry" />
             </div>
           </div>
         </div>

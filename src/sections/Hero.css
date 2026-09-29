@@ -78,6 +78,69 @@
   box-shadow: var(--shadow-lg);
 }
 
+/* ---- Reveal animation states (JS-driven via data-phase) ---- */
+/* Default: clean card sits dimmed/lowered until the reveal fires. */
+.hero__demo[data-phase='before'] .dictation-card--clean,
+.hero__demo[data-phase='polishing'] .dictation-card--clean {
+  opacity: 0.35;
+  filter: blur(2px);
+  transform: translateY(10px);
+}
+
+.hero__demo .dictation-card--clean {
+  transition:
+    opacity var(--transition-base),
+    filter var(--transition-base),
+    transform var(--transition-base);
+}
+
+.dictation-card--revealed {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  animation: dictation-pop 420ms ease;
+}
+
+@keyframes dictation-pop {
+  0% {
+    transform: scale(0.98);
+  }
+  60% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dictation-card__arrow--active {
+  animation: arrow-bounce 700ms ease infinite;
+}
+
+@keyframes arrow-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Reduced motion: no blur/offset, no keyframes — show the final state. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__demo .dictation-card--clean {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .dictation-card--revealed,
+  .dictation-card__arrow--active {
+    animation: none !important;
+  }
+}
+
 .dictation-card__label {
   display: inline-block;
   font-size: var(--fs-xs);

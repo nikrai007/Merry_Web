@@ -88,6 +88,7 @@
 .wpm-track__fill {
   display: block;
   height: 100%;
+  width: 0;
   border-radius: var(--radius-pill);
 }
 
@@ -101,6 +102,52 @@
     var(--color-accent),
     var(--color-accent-2)
   );
+}
+
+/*
+ * Both tracks run the same loop duration, but the keyboard track only
+ * fills to 20% while Merry fills to 100% — so Merry "types" ~4x more text
+ * in the same time (45 → ~220 wpm). Animation runs only once in view.
+ */
+.wpm-compare--run .wpm-track__fill--keyboard {
+  animation: wpm-fill-keyboard 3.6s ease-in-out infinite;
+}
+
+.wpm-compare--run .wpm-track__fill--merry {
+  animation: wpm-fill-merry 3.6s ease-in-out infinite;
+}
+
+@keyframes wpm-fill-keyboard {
+  0% {
+    width: 0;
+  }
+  70%,
+  100% {
+    width: 20%;
+  }
+}
+
+@keyframes wpm-fill-merry {
+  0% {
+    width: 0;
+  }
+  70%,
+  100% {
+    width: 100%;
+  }
+}
+
+/* Reduced motion: no typing loop — show final widths statically. */
+@media (prefers-reduced-motion: reduce) {
+  .wpm-track__fill--keyboard {
+    width: 20%;
+    animation: none !important;
+  }
+
+  .wpm-track__fill--merry {
+    width: 100%;
+    animation: none !important;
+  }
 }
 
 @media (max-width: 480px) {
