@@ -1,0 +1,110 @@
+.social-proof {
+  padding-block: var(--space-8);
+  text-align: center;
+}
+
+.social-proof__lead {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-5);
+}
+
+.social-proof__logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3) var(--space-5);
+  margin-bottom: var(--space-8);
+}
+
+.social-proof__logo {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-muted);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.02em;
+}
+
+.social-proof__pitch {
+  max-width: var(--content-narrow-width);
+  margin-inline: auto;
+  margin-bottom: var(--space-7);
+}
+
+.social-proof__headline {
+  margin-bottom: var(--space-4);
+}
+
+.social-proof__subcopy {
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+}
+
+/* ---- WPM comparison tracks ---- */
+.wpm-compare {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  max-width: var(--content-narrow-width);
+  margin-inline: auto;
+  text-align: left;
+}
+
+.wpm-track__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-2);
+}
+
+.wpm-track__name {
+  font-weight: var(--fw-semibold);
+}
+
+.wpm-track__value {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.wpm-track--merry .wpm-track__value {
+  color: var(--color-accent);
+  font-weight: var(--fw-semibold);
+}
+
+.wpm-track__bar {
+  height: 14px;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-alt);
+  overflow: hidden;
+}
+
+.wpm-track__fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-pill);
+}
+
+.wpm-track__fill--keyboard {
+  background-color: var(--color-text-muted);
+}
+
+.wpm-track__fill--merry {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
+}
+
+@media (max-width: 480px) {
+  .social-proof__subcopy {
+    font-size: var(--fs-base);
+  }
+}

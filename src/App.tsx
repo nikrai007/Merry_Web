@@ -1,28 +1,36 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
+import Hero from './sections/Hero'
+import SocialProof from './sections/SocialProof'
+import HowItWorks from './sections/HowItWorks'
+import Tone from './sections/Tone'
+import Capabilities from './sections/Capabilities'
+import Privacy from './sections/Privacy'
+import Testimonials from './sections/Testimonials'
+import Faq from './sections/Faq'
+import ClosingCTA from './sections/ClosingCTA'
 
 /**
  * App shell for the Merry landing page.
  *
- * Renders the shared Header and Footer around a set of section stubs.
- * Each <section> is filled in by a later feature (component-per-section
- * architecture under src/sections/). The ids are anchor targets used by
- * the header nav and footer links.
+ * Renders the shared Header and Footer around the content sections
+ * (component-per-section architecture under src/sections/). Each section
+ * owns its anchor id, used by the header nav and footer links.
  */
 function App() {
   return (
     <>
       <Header />
       <main>
-        <section id="hero" aria-label="Introduction" />
-        <section id="social-proof" aria-label="Social proof" />
-        <section id="how-it-works" aria-label="How it works" />
-        <section id="tone" aria-label="Tone control" />
-        <section id="features" aria-label="Features" />
-        <section id="privacy" aria-label="Privacy" />
-        <section id="testimonials" aria-label="Testimonials" />
-        <section id="faq" aria-label="Frequently asked questions" />
-        <section id="closing-cta" aria-label="Get Merry" />
+        <Hero />
+        <SocialProof />
+        <HowItWorks />
+        <Tone />
+        <Capabilities />
+        <Privacy />
+        <Testimonials />
+        <Faq />
+        <ClosingCTA />
       </main>
       <Footer />
     </>

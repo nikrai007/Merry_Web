@@ -223,6 +223,20 @@ p {
   background-color: var(--color-surface-alt);
 }
 
+/* Shared section heading block reused across content sections */
+.section-heading {
+  max-width: var(--content-narrow-width);
+  margin-inline: auto;
+  margin-bottom: var(--space-7);
+  text-align: center;
+}
+
+.section-heading__sub {
+  margin-top: var(--space-4);
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+}
+
 /* Respect users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {

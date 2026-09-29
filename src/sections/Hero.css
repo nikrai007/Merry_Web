@@ -1,0 +1,129 @@
+.hero {
+  padding-top: var(--space-9);
+  padding-bottom: var(--space-8);
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      var(--color-accent-soft) 0%,
+      transparent 45%
+    ),
+    var(--color-bg);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.hero__headline {
+  margin-bottom: var(--space-4);
+}
+
+.hero__subhead {
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+  max-width: 40ch;
+  margin-bottom: var(--space-5);
+}
+
+.hero__availability {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.hero__cta {
+  font-size: var(--fs-base);
+  padding: var(--space-4) var(--space-6);
+}
+
+/* ---- Before/after dictation cards ---- */
+.hero__demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.dictation-card {
+  width: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+}
+
+.dictation-card--clean {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+.dictation-card__label {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.dictation-card__label--clean {
+  color: var(--color-accent);
+}
+
+.dictation-card__text {
+  font-size: var(--fs-base);
+  color: var(--color-text);
+}
+
+.dictation-card--messy .dictation-card__text {
+  color: var(--color-text-muted);
+}
+
+.dictation-card__arrow {
+  font-size: var(--fs-xl);
+  color: var(--color-accent);
+  font-weight: var(--fw-bold);
+}
+
+@media (max-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+
+  .hero__subhead {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: var(--space-7);
+  }
+
+  .hero__cta {
+    width: 100%;
+  }
+}
