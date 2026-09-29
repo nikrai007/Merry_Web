@@ -1,0 +1,192 @@
+.hero {
+  padding-top: var(--space-9);
+  padding-bottom: var(--space-8);
+  background:
+    radial-gradient(
+      circle at 15% 0%,
+      var(--color-accent-soft) 0%,
+      transparent 45%
+    ),
+    var(--color-bg);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.hero__eyebrow {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.12em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-bottom: var(--space-4);
+}
+
+.hero__headline {
+  margin-bottom: var(--space-4);
+}
+
+.hero__subhead {
+  font-size: var(--fs-lg);
+  color: var(--color-text-muted);
+  max-width: 40ch;
+  margin-bottom: var(--space-5);
+}
+
+.hero__availability {
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.hero__cta {
+  font-size: var(--fs-base);
+  padding: var(--space-4) var(--space-6);
+}
+
+/* ---- Before/after dictation cards ---- */
+.hero__demo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.dictation-card {
+  width: 100%;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+}
+
+.dictation-card--clean {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ---- Reveal animation states (JS-driven via data-phase) ---- */
+/* Default: clean card sits dimmed/lowered until the reveal fires. */
+.hero__demo[data-phase='before'] .dictation-card--clean,
+.hero__demo[data-phase='polishing'] .dictation-card--clean {
+  opacity: 0.35;
+  filter: blur(2px);
+  transform: translateY(10px);
+}
+
+.hero__demo .dictation-card--clean {
+  transition:
+    opacity var(--transition-base),
+    filter var(--transition-base),
+    transform var(--transition-base);
+}
+
+.dictation-card--revealed {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  animation: dictation-pop 420ms ease;
+}
+
+@keyframes dictation-pop {
+  0% {
+    transform: scale(0.98);
+  }
+  60% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.dictation-card__arrow--active {
+  animation: arrow-bounce 700ms ease infinite;
+}
+
+@keyframes arrow-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* Reduced motion: no blur/offset, no keyframes — show the final state. */
+@media (prefers-reduced-motion: reduce) {
+  .hero__demo .dictation-card--clean {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  .dictation-card--revealed,
+  .dictation-card__arrow--active {
+    animation: none !important;
+  }
+}
+
+.dictation-card__label {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.dictation-card__label--clean {
+  color: var(--color-accent);
+}
+
+.dictation-card__text {
+  font-size: var(--fs-base);
+  color: var(--color-text);
+}
+
+.dictation-card--messy .dictation-card__text {
+  color: var(--color-text-muted);
+}
+
+.dictation-card__arrow {
+  font-size: var(--fs-xl);
+  color: var(--color-accent);
+  font-weight: var(--fw-bold);
+}
+
+@media (max-width: 900px) {
+  .hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+
+  .hero__subhead {
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-top: var(--space-7);
+  }
+
+  .hero__cta {
+    width: 100%;
+  }
+}

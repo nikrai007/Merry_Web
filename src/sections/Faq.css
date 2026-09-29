@@ -1,0 +1,113 @@
+.faq {
+  padding-block: var(--space-8);
+}
+
+.faq__list {
+  max-width: var(--content-narrow-width);
+  margin-inline: auto;
+  border-top: 1px solid var(--color-border);
+}
+
+.faq__item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* The <h3> just wraps the button; strip its default type styling. */
+.faq__question {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: var(--fw-regular);
+  letter-spacing: normal;
+}
+
+.faq__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-5) var(--space-2);
+  text-align: left;
+  font-size: var(--fs-lg);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  transition: color var(--transition-fast);
+}
+
+.faq__trigger:hover {
+  color: var(--color-accent);
+}
+
+.faq__question-text {
+  flex: 1;
+}
+
+/* Plus / minus icon drawn with pseudo-elements. */
+.faq__icon {
+  position: relative;
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+.faq__icon::before,
+.faq__icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background-color: var(--color-accent);
+  border-radius: var(--radius-pill);
+  transition: transform var(--transition-base);
+}
+
+.faq__icon::before {
+  width: 18px;
+  height: 2px;
+}
+
+.faq__icon::after {
+  width: 2px;
+  height: 18px;
+}
+
+/* Open state: rotate the vertical bar away so a "−" remains. */
+.faq__icon--open::after {
+  transform: rotate(90deg);
+}
+
+.faq__panel {
+  overflow: hidden;
+}
+
+.faq__panel--open {
+  animation: faq-open var(--transition-base) ease;
+}
+
+@keyframes faq-open {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.faq__answer {
+  padding: 0 var(--space-2) var(--space-5);
+  color: var(--color-text-muted);
+  max-width: 62ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq__icon::before,
+  .faq__icon::after {
+    transition: none;
+  }
+
+  .faq__panel--open {
+    animation: none;
+  }
+}
