@@ -77,16 +77,20 @@
   color: var(--color-text);
 }
 
+/* Dropped kinds in the static before/after view: struck through + muted. */
 .cleanup-token--filler,
-.cleanup-token--repetition {
+.cleanup-token--repetition,
+.cleanup-token--superseded {
   color: var(--color-text-muted);
   text-decoration: line-through;
   text-decoration-color: currentColor;
 }
 
+/* The correction is the surviving replacement, so it reads as kept text
+   (accented to show Merry made the fix), never struck through. */
 .cleanup-token--correction {
-  color: var(--color-text-muted);
-  text-decoration: line-through;
+  color: var(--color-accent);
+  font-weight: var(--fw-semibold);
 }
 
 /* ---- Animated token states (override base while animating) ---- */
@@ -114,7 +118,7 @@
   font-weight: var(--fw-semibold);
 }
 
-/* Processed + removed (filler / repetition / superseded correction). */
+/* Processed + removed (filler / repetition / superseded phrase). */
 .cleanup-token--dropped {
   color: var(--color-text-muted);
   text-decoration: line-through;

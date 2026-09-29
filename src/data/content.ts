@@ -29,8 +29,24 @@ export const heroExample: DictationExample = {
  * Each token is either plain text that survives, or a token Merry
  * removes/edits. FEAT-003 animates the removal and shows the labelled
  * tags (Filler / Correction / Repetition).
+ *
+ * Token kinds:
+ *   - keep        text that survives untouched into the cleaned sentence.
+ *   - filler      filler word ("um", "you know") that Merry drops.
+ *   - repetition  a stutter/duplicate phrase that Merry drops.
+ *   - superseded  a misspoken phrase the speaker corrected; Merry drops it
+ *                 in favour of the following `correction` token.
+ *   - correction  the replacement phrase that survives (paired with the
+ *                 `superseded` token it replaces). This is the only edited
+ *                 kind that is KEPT: it lights the "Correction" tag AND
+ *                 stays in the output, so the tag maps to a real edit.
  * ------------------------------------------------------------------ */
-export type CleanupTokenKind = 'keep' | 'filler' | 'correction' | 'repetition'
+export type CleanupTokenKind =
+  | 'keep'
+  | 'filler'
+  | 'superseded'
+  | 'correction'
+  | 'repetition'
 
 export interface CleanupToken {
   text: string
@@ -44,8 +60,12 @@ export const cleanupTranscript: CleanupToken[] = [
   { text: 'we should', kind: 'keep' },
   { text: 'we should', kind: 'repetition' },
   { text: 'ship the update', kind: 'keep' },
-  { text: 'on Friday,', kind: 'correction' },
-  { text: 'on Thursday,', kind: 'keep' },
+  // Spoken self-correction: "on Friday," is misspoken and dropped
+  // (`superseded`); the following `correction` token "on Thursday," is the
+  // replacement Merry keeps. Only the replacement survives, so the cleaned
+  // sentence reads "...ship the update on Thursday, before the launch."
+  { text: 'on Friday,', kind: 'superseded' },
+  { text: 'on Thursday,', kind: 'correction' },
   { text: 'you know,', kind: 'filler' },
   { text: 'before the launch.', kind: 'keep' },
 ]

@@ -9,7 +9,14 @@ interface CleanupDemoProps {
   labels: { kind: CleanupTokenKind; label: string }[]
 }
 
-/** Tokens that survive into the cleaned-up sentence. */
+/**
+ * Tokens that survive into the cleaned-up sentence.
+ *
+ * `correction` is the replacement phrase in a spoken self-correction and is
+ * kept; the `superseded` phrase it replaces is dropped (along with filler and
+ * repetition). This keeps the cleaned output coherent: the misspoken phrase
+ * never appears next to its fix.
+ */
 const isKept = (kind: CleanupTokenKind) =>
   kind === 'keep' || kind === 'correction'
 
@@ -18,9 +25,9 @@ const isKept = (kind: CleanupTokenKind) =>
  *
  * Progressively walks the raw transcript token by token. As each edited
  * token is processed it is struck through and its category tag lights up
- * (Filler removed / Correction / Repetition). Filler and repetition tokens
- * then drop out; corrections are the ones that stay, leaving the polished
- * sentence. The whole thing loops.
+ * (Filler removed / Correction / Repetition). Filler, repetition, and the
+ * superseded half of a self-correction drop out; the correction replacement
+ * and plain keeps stay, leaving the polished sentence. The whole thing loops.
  *
  * Under prefers-reduced-motion it renders a static before/after view side
  * by side instead of animating.

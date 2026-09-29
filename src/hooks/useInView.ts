@@ -32,6 +32,32 @@ export function useInView<T extends HTMLElement>(
     }, options)
 
     observer.observe(node)
+
+    // Safety net for the "already fully on-screen on load" case: browsers
+    // normally emit an initial intersecting entry when you start observing,
+    // but if the element is already in the viewport we also check its rect
+    // synchronously so the reveal/demo still triggers without a scroll.
+    if (
+      node.getBoundingClientRect().top <
+      (window.innerHeight || document.documentElement.clientHeight)
+    ) {
+      // Defer so we don't setState before the observer had a chance; either
+      // path is idempotent because we only ever flip `inView` to true.
+      const raf = window.requestAnimationFrame(() => {
+        const rect = node.getBoundingClientRect()
+        const viewportHeight =
+          window.innerHeight || document.documentElement.clientHeight
+        if (rect.top < viewportHeight && rect.bottom > 0) {
+          setInView(true)
+          observer.disconnect()
+        }
+      })
+      return () => {
+        window.cancelAnimationFrame(raf)
+        observer.disconnect()
+      }
+    }
+
     return () => observer.disconnect()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
